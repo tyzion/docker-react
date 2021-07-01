@@ -1,0 +1,15 @@
+language: generic
+# We need to name this file as .travis.yml
+# the first dot is very important
+# sudo when we make the project build
+sudo: required
+# it install a copy of docker
+services:
+  - docker
+
+# it's the setup before our project executes
+before_install:
+  - docker build -t tyzion/docker-react -f Dockerfile.dev .
+
+script: 
+  - docker run -e CI=true USERNAME/docker-react npm run test
